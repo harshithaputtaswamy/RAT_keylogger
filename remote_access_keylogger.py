@@ -51,7 +51,6 @@ def execute_cmd(cmd):
 
 
 def send_data_to_server():
-    counter = 0
     try:
         conn = http.client.HTTPConnection(http_ip, http_port)
         params = urllib.parse.urlencode({"text": text})
@@ -65,9 +64,6 @@ def send_data_to_server():
         timer = threading.Timer(interval, send_data_to_server)
         timer.start()
 
-        counter += 1
-        if counter > 10:
-            return
     except:
         print("Failed request")
 
